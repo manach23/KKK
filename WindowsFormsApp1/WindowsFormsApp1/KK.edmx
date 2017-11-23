@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="team01Modelx.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="accounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KtoNr" Type="int" Nullable="false" />
+          <Property Name="IBAN" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="BIC" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Besitzer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kunden">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titel_Vor" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Vorname" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Nachname" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Geburtstag" Type="date" Nullable="false" />
+          <Property Name="1_Wohnsitz" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="1_Postleitzahl" Type="int" Nullable="false" />
+          <Property Name="2_Wohnsitz" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="2_Postleitzahl" Type="int" Nullable="false" />
+          <Property Name="Sozialversicherungsnummer" Type="int" Nullable="false" />
+          <Property Name="Versicherungsanstalt" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Einkommen" Type="int" Nullable="false" />
+          <Property Name="Titel_Nach" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <!--Während der Generierung sind Fehler aufgetreten:
+Warnung 6002: Für Tabelle/Sicht 'def.team01.Sicherheiten' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
+        <EntityType Name="Sicherheiten">
+          <Key>
+            <PropertyRef Name="Besitzer_ID" />
+            <PropertyRef Name="Sicherheit" />
+          </Key>
+          <Property Name="Besitzer_ID" Type="int" Nullable="false" />
+          <Property Name="Sicherheit" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Passhash" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Nutzerrechte" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="team01ModelxStoreContainer">
+          <EntitySet Name="accounts" EntityType="Self.accounts" Schema="team01" store:Type="Tables" />
+          <EntitySet Name="Kunden" EntityType="Self.Kunden" Schema="team01" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="team01" store:Type="Tables" />
+          <EntitySet Name="Sicherheiten" EntityType="Self.Sicherheiten" store:Type="Tables" store:Schema="team01">
+            <DefiningQuery>SELECT
+`Sicherheiten`.`Besitzer_ID`, 
+`Sicherheiten`.`Sicherheit`
+FROM `Sicherheiten` AS `Sicherheiten`</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="team01Modelx" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="accounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KtoNr" Type="Int32" Nullable="false" />
+          <Property Name="IBAN" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BIC" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Besitzer" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kunden">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titel_Vor" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vorname" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nachname" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Geburtstag" Type="DateTime" Nullable="false" />
+          <Property Name="C1_Wohnsitz" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="C1_Postleitzahl" Type="Int32" Nullable="false" />
+          <Property Name="C2_Wohnsitz" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="C2_Postleitzahl" Type="Int32" Nullable="false" />
+          <Property Name="Sozialversicherungsnummer" Type="Int32" Nullable="false" />
+          <Property Name="Versicherungsanstalt" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Einkommen" Type="Int32" Nullable="false" />
+          <Property Name="Titel_Nach" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Passhash" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nutzerrechte" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sicherheiten">
+          <Key>
+            <PropertyRef Name="Besitzer_ID" />
+            <PropertyRef Name="Sicherheit" />
+          </Key>
+          <Property Name="Besitzer_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sicherheit" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="team01x" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accounts" EntityType="Self.accounts" />
+          <EntitySet Name="Kunden" EntityType="Self.Kunden" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="Sicherheiten" EntityType="Self.Sicherheiten" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="team01ModelxStoreContainer" CdmEntityContainer="team01x">
+          <EntitySetMapping Name="accounts">
+            <EntityTypeMapping TypeName="team01Modelx.accounts">
+              <MappingFragment StoreEntitySet="accounts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KtoNr" ColumnName="KtoNr" />
+                <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+                <ScalarProperty Name="BIC" ColumnName="BIC" />
+                <ScalarProperty Name="Besitzer" ColumnName="Besitzer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kunden">
+            <EntityTypeMapping TypeName="team01Modelx.Kunden">
+              <MappingFragment StoreEntitySet="Kunden">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Titel_Vor" ColumnName="Titel_Vor" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="Geburtstag" ColumnName="Geburtstag" />
+                <ScalarProperty Name="C1_Wohnsitz" ColumnName="1_Wohnsitz" />
+                <ScalarProperty Name="C1_Postleitzahl" ColumnName="1_Postleitzahl" />
+                <ScalarProperty Name="C2_Wohnsitz" ColumnName="2_Wohnsitz" />
+                <ScalarProperty Name="C2_Postleitzahl" ColumnName="2_Postleitzahl" />
+                <ScalarProperty Name="Sozialversicherungsnummer" ColumnName="Sozialversicherungsnummer" />
+                <ScalarProperty Name="Versicherungsanstalt" ColumnName="Versicherungsanstalt" />
+                <ScalarProperty Name="Einkommen" ColumnName="Einkommen" />
+                <ScalarProperty Name="Titel_Nach" ColumnName="Titel_Nach" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="team01Modelx.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Passhash" ColumnName="Passhash" />
+                <ScalarProperty Name="Nutzerrechte" ColumnName="Nutzerrechte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sicherheiten">
+            <EntityTypeMapping TypeName="team01Modelx.Sicherheiten">
+              <MappingFragment StoreEntitySet="Sicherheiten">
+                <ScalarProperty Name="Besitzer_ID" ColumnName="Besitzer_ID" />
+                <ScalarProperty Name="Sicherheit" ColumnName="Sicherheit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
